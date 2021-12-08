@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Numixte </title>
+        <link rel="stylesheet" href="style.css">
+        <script src="d3.v3.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        </style>
+        <a href="index.html"><img id="p33" src="p3.png"></a>
+        <script type="text/javascript">
+
+/* Script récupéré sur une librairie pour d3.js, je l'ai fortement modifié et adapté, auteur:,source:///////////////////////////////*/
+            var labelArea = 360;
+            var chart,
+                    width = 100,
+                    bar_height = 20,
+                    height = bar_height * 200;
+            var rightOffset = width + labelArea;
+        
+            var lCol = "prct_femme_France";
+            var rCol = "prct_femme_Malaisie";
+            var xFrom = d3.scale.linear()
+                    .range([0, width]);
+            var xTo = d3.scale.linear()
+                    .range([0, width]);
+            var y = d3.scale.ordinal()
+                    .rangeBands([0, 100]);
+        
+            function render(data) {
+                var chart = d3.select("body")
+                        .append('svg')
+                        .attr('class', 'chart')
+                        .attr('width', 5600)
+                        .attr('height', height);
+        
+                xFrom.domain(d3.extent(data, function (d) {
+                    return d[lCol];
+                }));
+                xTo.domain(d3.extent(data, function (d) {
+                    return d[rCol];
+                }));
+        
+                y.domain(data.map(function (d) {
+                    return d.specialite;
+                }));
+        
+                var yPosByIndex = function (d) {
+                    return y(d.specialite)+30;
+                };
+                chart.selectAll("rect.left")
+                        .data(data)
+                        .enter().append("rect")
+                        .attr("x", function (d) {
+                            return width - xFrom(d[lCol]-250);
+                        })
+                        .attr("y", yPosByIndex)
+                        .attr("class", "left")
+                        .attr("width", function (d) {
+                            return xFrom(d[lCol]);
+                        })
+                        .attr("height", y.rangeBand());
+                chart.selectAll("text.leftscore")
+                        .data(data)
+                        .enter().append("text")
+                        .attr("x", function (d) {
+                            return width + 180 ;
+                        })
+                        .attr("y", function (d) {
+                            return y(d.specialite)+25 + y.rangeBand() / 2;
+                        })
+                        .attr("dx", "20")
+                        .attr("dy", ".36em")
+                        .attr("text-anchor", "end")
+                        .attr('class', 'leftscore')
+                        .text(function(d){return d.specialite;});
+                chart.selectAll("text.name")
+                        .data(data)
+                        .enter().append("text")
+                        .attr("x", function (d) {
+                            return width - xFrom(d[lCol]-235);
+                        })
+                        .attr("y", function (d) {
+                            return y(d.specialite)+ 32 + y.rangeBand() / 2;
+                        })
+                        .attr("dy", ".20em")
+                        .attr("text-anchor", "middle")
+                        .attr('class', 'name')
+                        .text(function(d){return d[lCol];});
+        
+                chart.selectAll("rect.right")
+                        .data(data)
+                        .enter().append("rect")
+                        .attr("x", rightOffset)
+                        .attr("y", yPosByIndex)
+                        .attr("class", "right")
+                        .attr("width", function (d) {
+                            return xTo(d[rCol]);
+                        })
+                        .attr("height", y.rangeBand());
+                chart.selectAll("text.score")
+                        .data(data)
+                        .enter().append("text")
+                        .attr("x", function (d) {
+                            return xTo(d[rCol]) + rightOffset+40;
+                        })
+                        .attr("y", function (d) {
+                            return y(d.specialite)+29 + y.rangeBand() / 2;
+                        })
+                        .attr("dx", -5)
+                        .attr("dy", ".36em")
+                        .attr("text-anchor", "end")
+                        .attr('class', 'score')
+                        .text(function(d){return d[rCol];});
+                chart.append("text").attr("x",width/3+440).attr("y", 10).attr("class","title").text("prct_femme_Malaisie");
+                chart.append("text").attr("x",width/3+rightOffset-160).attr("y", 10).attr("class","title2").text("prct_femme_France");
+                chart.append("text").attr("x",width+labelArea/3+20).attr("y", 10).attr("class","title3").text("specialite");
+                
+ /*/////////////////////////////////    fin script    ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/       
+        
+            }
+        
+            function type(d) {
+                d["prct_femme_France"] = +d["prct_femme_France"];
+                d["prct_femme_Malaisie"] = +d["prct_femme_Malaisie"];
+                return d;
+            }
+        
+            d3.csv("https://raw.githubusercontent.com/ghannotte/test/main/Test_data.csv", type, render);  
+</script>
+<style>
+    body {
+      background-image: url('fondetoile.jpg');
+    }
+    </style> 
+</html>
