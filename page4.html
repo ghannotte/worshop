@@ -14,7 +14,136 @@
           <img src="fondetoile.jpg" class="object" data-value="-2" alt="">
 
 <body id=system>
-        <a href="index.html"><img id="p44" src="p4.png"class="object" data-value="-2" alt="" ></a>
+        <a href="index.html"><img id="p44" src="p4.gif"></a>
 
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        
+        <div id="t44"><center><p>Insertion</p></center>
+          <p>Vie Professionnel</p></div>
+<div id="menu">         
+        <label for="fill">Choix de la filiére:</label>
+        <select name="fill" >
+          <optgroup label="Filiéres">
+                <option onclick="update(data1)">Dans le secteur numérique</option>
+                <option onclick="update(data2)">Support informatique et systèmes d'information</option>
+                <option onclick="update(data1)">Communication/interface utilisateur et création numérique</option>
+                <option onclick="update(data3)">Infrastructure réseaux/télécommunications</option>
+                <option onclick="update(data1)">Programmation et développement informatique</option>
+                <option onclick="update(data2)">Expertise et conseil</option>
+                <option onclick="update(data3)">Infrastructure réseaux/télécommunications</option>
+                <option onclick="update(data4)">Analayse de données et intelligence artificielle</option>
+          </optgroup>
+
+        </select> 
+</div>
+<div id="txt">
+  <p>Données</p>
+  <p>  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- </p>
+  <p>Répartition des femmes qui travaillent dans le secteur du numérique (Excel données générées numériques) </p>
+  <p> - Répartition dans les différentes filières du domaine du numérique </p>
+  <p>  (https:// www.insee.fr/fr/statistiques/4238635 (VERSION Imprimable) PARTIE 8) </p>
+  <p>  - Répartition des femmes dirigeantes startup (problème de disparité dans l'investissement </p>
+  <p>  (Excel données générées numériques)                                         </p>
+  </div>
+
+  <div id="txt4">
+    <p>  Solutions  </p>
+      <p>  --------------------------------------------------------------------------------------------------------------------------------------- </p>   
+      <p>- La charte d’engagement pour la mixité  </p>
+        <p> + Veuillez à appliquer les points de la charte  </p>
+          <p> + Elargir le spectre d’application (inclure plus d’entreprises…..) </p>
+            <p> - Accompagner les femmes dans l’entreprenariat </p>
+              <p>+ Profiter des initiatives des associations déjà en place pour les adapter au département </p>
+                <p> (https://institutnr.org/femmes-metiers numerique)  </p>
+                  <p> + Communiquer sur les projets déjà en place pour accompagner les  entrepreneurs dans leur processus de création de demain pendant  </p>
+                    <p> le processus Share It / Bouge t’as boîte / Orange programme femme entrepreneuse.</p>
+
+      </div>
+  <div id="rectangle"><p>Part de femmes</p></div>
+  <div id="rectangle2"><p>Part d'hommes</p></div>
+  <img id="shema3" src="carte mere.jpg">
+        <script type="text/javascript" src="d3.js"></script>
+
+                
+        <!-- Create a div where the graph will take place -->
+        <div id="my_dataviz">
+          
+        <script>
+        
+        // set the dimensions and margins of the graph
+        var width = 300
+            height = 450
+            margin = 40
+        
+        // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+        var radius = Math.min(width, height) / 2 - margin
+        
+        // append the svg object to the div called 'my_dataviz'
+        var svg = d3.select("#my_dataviz")
+          .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        
+        // create 2 data_set
+        var data1 = {a: 15, b: 85}
+        var data2 = {a: 17, b: 83}
+        var data3 = {a: 17, b: 83}
+        var data4 = {a: 27, b: 73}
+        var data5 = {a: 47, b: 53}
+        var data6 = {a: 24, b: 76}
+        var data7 = {a:  9, b: 91}
+        var data8 = {a: 45, b: 55}
+        
+        // set the color scale
+        var color = d3.scaleOrdinal()
+          .domain(["a", "b"])
+          .range(["#5FB9AD", "#3D358F"]);
+                
+        // A function that create / update the plot for a given variable:
+        function update(data) {
+        
+          // Compute the position of each group on the pie:
+          var pie = d3.pie()
+            .value(function(d) {return d.value; })
+            .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+          var data_ready = pie(d3.entries(data))
+        
+          // map to data
+          var u = svg.selectAll("path")
+            .data(data_ready)
+        
+          // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+          u
+            .enter()
+            .append('path')
+            .merge(u)
+            .transition()
+            .duration(1000)
+            .attr('d', d3.arc()
+              .innerRadius(0)
+              .outerRadius(radius)
+            )
+            .attr('fill', function(d){ return(color(d.data.key)) })
+            .attr("stroke", "white")
+            .style("stroke-width", "2px")
+            .style("opacity", 1)
+        
+          // remove the group that is not present anymore
+          u
+            .exit()
+            .remove()
+        
+        }
+        
+        // Initialize the plot with the first dataset
+        update(data1)
+        
+        
+        
+        </script>
+</div>
 </body>
 </html>

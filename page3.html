@@ -8,7 +8,7 @@
         <script src="d3.v3.min.js"></script>
         <link rel="stylesheet" href="style.css">
         </style>
-        <a href="index.html"><img id="p33" src="p3.png"></a>
+        <a href="index.html"><img id="p33" src="p3.gif"></a>
         <script type="text/javascript">
 
 /* Script récupéré sur une librairie pour d3.js, je l'ai fortement modifié et adapté, auteur:,source:///////////////////////////////*/
@@ -19,8 +19,8 @@
                     height = bar_height * 200;
             var rightOffset = width + labelArea;
         
-            var lCol = "prct_femme_France";
-            var rCol = "prct_femme_Malaisie";
+            var lCol = "France";
+            var rCol = "Malaisie";
             var xFrom = d3.scale.linear()
                     .range([0, width]);
             var xTo = d3.scale.linear()
@@ -113,8 +113,8 @@
                         .attr("text-anchor", "end")
                         .attr('class', 'score')
                         .text(function(d){return d[rCol];});
-                chart.append("text").attr("x",width/3+440).attr("y", 10).attr("class","title").text("prct_femme_Malaisie");
-                chart.append("text").attr("x",width/3+rightOffset-160).attr("y", 10).attr("class","title2").text("prct_femme_France");
+                chart.append("text").attr("x",width/3+440).attr("y", 10).attr("class","title").text("Malaisie");
+                chart.append("text").attr("x",width/3+rightOffset-160).attr("y", 10).attr("class","title2").text("France");
                 chart.append("text").attr("x",width+labelArea/3+20).attr("y", 10).attr("class","title3").text("specialite");
                 
  /*/////////////////////////////////    fin script    ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/       
@@ -129,9 +129,26 @@
         
             d3.csv("https://raw.githubusercontent.com/ghannotte/test/main/Test_data.csv", type, render);  
 </script>
+<div id="t33"><p>Etudes supérieures</p></div>
 <style>
     body {
       background-image: url('fondetoile.jpg');
     }
-    </style> 
+</style>     
+ <div id="txt">
+ <p>Données</p>
+ <p>  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- </p>
+ <p>   Le choix des filières en études supérieures (comparaison avec la Malaisie)                                                              </p>
+ <p>   données croisées entre les données de l’éducation nationale française                                                                   </p>
+ <p>   (rapport annuel global 2019, rapport des écoles d’ingénieurs 2020,                                                                     </p> 
+ <p>   rapport sur les filières de l'enseignement 2019) et Malaisienne(rapport annuel global 2019).                                            </p>
+ <p>   Les valeurs réprésententes le pourcentage de femmes dans chaque filliéres                                            </p>
+ </div>  
+ <div id="txt3">
+  <p>  Solutions  </p>
+    <p>  --------------------------------------------------------------------------------------------------------------------------------------- </p>   
+    <p> - Conclure à partir du modèle de « réussite de la malaisie » </p>
+        <p>  - Mieux communiquer les données relative à l’inclusion des femmes dans le </p>
+
+</div>
 </html>
