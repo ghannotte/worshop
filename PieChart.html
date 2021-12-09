@@ -1,0 +1,114 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Color scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<!-- Add 2 buttons -->
+<button onclick="update(data1)">Dans le secteur numérique</button>
+<button onclick="update(data2)">Support informatique et systèmes d'information</button>
+<button onclick="update(data3)">Programmation et développement informatique</button>
+<button onclick="update(data4)">Management et stratégie</button>
+<button onclick="update(data1)">Communication/interface utilisateur et création numérique</button>
+<button onclick="update(data2)">Expertise et conseil</button>
+<button onclick="update(data3)">Infrastructure réseaux/télécommunications</button>
+<button onclick="update(data4)">Analayse de données et intelligence artificielle</button>
+
+<script type="text/javascript" src="./d3.js"></script>
+  <body>
+	
+	<div id="legende">
+
+	</div>
+	</body>	
+
+<script>
+		
+<rect style="fill: #5FB9AD" x="10" y="30" width="10" height="10"></rect>
+<rect style="fill: #3D358F" x="20" y="40" width="10" height="10"></rect>
+		
+	
+</script>
+	
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+  
+<script>
+
+// set the dimensions and margins of the graph
+var width = 450
+    height = 450
+    margin = 40
+
+// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+var radius = Math.min(width, height) / 2 - margin
+
+// append the svg object to the div called 'my_dataviz'
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+// create 2 data_set
+var data1 = {a: 15, b: 85}
+var data2 = {a: 17, b: 83}
+var data3 = {a: 17, b: 83}
+var data4 = {a: 27, b: 73}
+var data5 = {a: 47, b: 53}
+var data6 = {a: 24, b: 76}
+var data7 = {a:  9, b: 91}
+var data8 = {a: 45, b: 55}
+
+// set the color scale
+var color = d3.scaleOrdinal()
+  .domain(["a", "b"])
+  .range(["#5FB9AD", "#3D358F"]);
+	
+// A function that create / update the plot for a given variable:
+function update(data) {
+
+  // Compute the position of each group on the pie:
+  var pie = d3.pie()
+    .value(function(d) {return d.value; })
+    .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+  var data_ready = pie(d3.entries(data))
+
+  // map to data
+  var u = svg.selectAll("path")
+    .data(data_ready)
+
+  // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+  u
+    .enter()
+    .append('path')
+    .merge(u)
+    .transition()
+    .duration(1000)
+    .attr('d', d3.arc()
+      .innerRadius(0)
+      .outerRadius(radius)
+    )
+    .attr('fill', function(d){ return(color(d.data.key)) })
+    .attr("stroke", "white")
+    .style("stroke-width", "2px")
+    .style("opacity", 1)
+
+  // remove the group that is not present anymore
+  u
+    .exit()
+    .remove()
+
+}
+
+// Initialize the plot with the first dataset
+update(data1)
+
+
+
+</script>
