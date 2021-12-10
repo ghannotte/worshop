@@ -14,7 +14,144 @@
           <img src="fondetoile.jpg" class="object" data-value="-2" alt="">
 
 <body id=system>
-        <a href="index.html"><img id="p44" src="p4.png"class="object" data-value="-2" alt="" ></a>
+        <a href="index.html"><img id="p44" src="p4.gif"></a>
 
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        
+        <div id="t44"><center><p>Insertion</p></center>
+          <p> professionnel</p></div>
+<div id="menu">         
+        <label for="fill">Choix de la filiére:</label>
+        <select name="fill" >
+          <optgroup label="Filiéres">
+                <option onclick="update(data1)">Dans le secteur numérique</option>
+                <option onclick="update(data2)">Support informatique et systèmes d'information</option>
+                <option onclick="update(data1)">Communication/interface utilisateur et création numérique</option>
+                <option onclick="update(data3)">Infrastructure réseaux/télécommunications</option>
+                <option onclick="update(data1)">Programmation et développement informatique</option>
+                <option onclick="update(data2)">Expertise et conseil</option>
+                <option onclick="update(data3)">Infrastructure réseaux/télécommunications</option>
+                <option onclick="update(data4)">Analayse de données et intelligence artificielle</option>
+          </optgroup>
+
+        </select> 
+</div>
+
+  <div id="txt2">
+    <p>  Définition des problèmes  </p>
+    <FONT face="arial"><p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------- </p></FONT>  
+      <p>- Manque d’accompagnement des femmes dans le domaine de l’entreprenariat</p>
+        <p>- Persistance de stéréotypes sexistes chez les investisseurs dans le domaine de l’entreprenariat</p>
+          <p>- Disparité notoire dans les métiers techniques du numérique</p>
+
+      </div>
+      <div id="txt4">
+
+        <p>Solutions présentées </p>
+        <FONT face="arial"><p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------- </p></FONT> 
+        <p>- Accompagner les femmes dans l’entreprenariat
+          <p>- Profiter des initiatives des associations déjà en place pour les adapter au département</p> 
+          <p> - Communiquer sur les projets déjà en place pour accompagner les entrepreneuses dans leur processus de création d’entreprise </p>
+            <p>  (Share It / Bouge ta boîte / Orange programme femmes entrepreneuses)</p>
+          
+          <p>-  Veiller à appliquer les points de la charte d’engagement pour la mixité</p>
+          <p>- Élargir le spectre d’application en incluant plus d’acteurs (entreprises, associations etc.)</p>
+
+</div>
+  <div id="rectangle"></div>
+  <div id="rectangle2"></div>
+
+  <div id="legend"><p>Part de femmes</p></div>
+  <div id="legend1"><p>Part d'hommes</p></div>
+  <div id="txt6">
+    <p>Représentation du contexte</p>
+    <FONT face="arial"><p>  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- </p></FONT>
+    </div>  
+
+  <img id="shema3" src="fusée.jpg">
+        <script type="text/javascript" src="d3.js"></script>
+
+                
+    
+        <div id="my_dataviz">
+<!-- Début de script inspiré. Auteur: Yan Holtz, source: https://www.d3-graph-gallery.com/graph/pie_changeData.html.   -->        
+        <script>
+        
+        // set the dimensions and margins of the graph
+        var width = 300
+            height = 450
+            margin = 40
+        
+        // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+        var radius = Math.min(width, height) / 2 - margin
+        
+        // append the svg object to the div called 'my_dataviz'
+        var svg = d3.select("#my_dataviz")
+          .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        
+        // create 2 data_set
+        var data1 = {a: 15, b: 85}
+        var data2 = {a: 17, b: 83}
+        var data3 = {a: 17, b: 83}
+        var data4 = {a: 27, b: 73}
+        var data5 = {a: 47, b: 53}
+        var data6 = {a: 24, b: 76}
+        var data7 = {a:  9, b: 91}
+        var data8 = {a: 45, b: 55}
+        
+        // set the color scale
+        var color = d3.scaleOrdinal()
+          .domain(["a", "b"])
+          .range(["#5FB9AD", "#3D358F"]);
+                
+        // A function that create / update the plot for a given variable:
+        function update(data) {
+        
+          // Compute the position of each group on the pie:
+          var pie = d3.pie()
+            .value(function(d) {return d.value; })
+            .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+          var data_ready = pie(d3.entries(data))
+        
+          // map to data
+          var u = svg.selectAll("path")
+            .data(data_ready)
+        
+          // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+          u
+            .enter()
+            .append('path')
+            .merge(u)
+            .transition()
+            .duration(1000)
+            .attr('d', d3.arc()
+              .innerRadius(0)
+              .outerRadius(radius)
+            )
+            .attr('fill', function(d){ return(color(d.data.key)) })
+            .attr("stroke", "white")
+            .style("stroke-width", "2px")
+            .style("opacity", 1)
+        
+          // remove the group that is not present anymore
+          u
+            .exit()
+            .remove()
+        
+        }
+        
+        // Initialize the plot with the first dataset
+        update(data1)
+        
+        
+        
+        </script>
+    <!-- FIn du script                                                                                                 -->      
+</div>
 </body>
 </html>
